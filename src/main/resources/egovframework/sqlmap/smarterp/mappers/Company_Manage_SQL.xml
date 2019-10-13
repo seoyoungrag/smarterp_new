@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="defaultCodeMapper">
+
+	<insert id="insertCompany" parameterType="companyVO">
+INSERT INTO [dbo].[company]
+           (
+           [company_nm]
+           ,[acc_order]
+           ,[acc_start_d]
+           ,[acc_end_d]
+           ,[com_reg_num]
+           ,[cor_reg_num]
+           ,[boss_nm]
+           ,[is_foreigner]
+           ,[citi_num]
+           ,[hq_postcode]
+           ,[hq_addr]
+           ,[hq_addr_detail]
+           ,[hq_phone1]
+           ,[hq_phone2]
+           ,[hq_fax1]
+           ,[hq_fax2]
+           ,[com_biz]
+           ,[com_cate]
+           ,[com_type]
+           ,[com_est_d]
+           ,[com_open_d]
+           ,[com_close_d]
+           ,[is_use]
+           ,[com_eng_nm]
+           ,[cor_eng_nm]
+           ,[com_eng_addr]
+           ,[com_homepage]
+           ,[com_gwpage]
+           ,[home_postcode]
+           ,[home_addr]
+           ,[home_addr_detail]
+           ,[home_phone]
+           ,[is_deleted])
+     VALUES
+           (#{companyNm}
+           ,#{accOrder}
+           ,#{accStartD}
+           ,#{accEndD}
+           ,#{comRegNum}
+           ,#{corRegNum}
+           ,#{bossNm}
+           ,#{isForeigner}
+           ,#{citiNum}
+           ,#{hqPostcode}
+           ,#{hqAddr}
+           ,#{hqAddrDetail}
+           ,#{hqPhone1}
+           ,#{hqPhone2}
+           ,#{hqFax1}
+           ,#{hqFax2}
+           ,#{comBiz}
+           ,#{comCate}
+           ,#{comType}
+           ,#{comEstD}
+           ,#{comOpenD}
+           ,#{comCloseD}
+           ,#{isUse}
+           ,#{comEngNm}
+           ,#{corEngNm}
+           ,#{comEngAddr}
+           ,#{comHomepage}
+           ,#{comGwpage}
+           ,#{homePostcode}
+           ,#{homeAddr}
+           ,#{homeAddrDetail}
+           ,#{homePhone}
+           ,0)
+	</insert>
+	
+	<insert id="updateCompany" parameterType="companyVO">
+
+UPDATE [dbo].[company]
+   SET [acc_order] = #{accOrder}
+      ,[acc_start_d] = #{accStartD}
+      ,[acc_end_d] = #{accEndD}
+      ,[com_reg_num] = #{comRegNum}
+      ,[cor_reg_num] = #{corRegNum}
+      ,[boss_nm] = #{bossNm}
+      ,[is_foreigner] = #{isForeigner}
+      ,[citi_num] = #{citiNum}
+      ,[hq_postcode] = #{hqPostcode}
+      ,[hq_addr] = #{hqAddr}
+      ,[hq_addr_detail] = #{hqAddrDetail}
+      ,[hq_phone1] = #{hqPhone1}
+      ,[hq_phone2] = #{hqPhone2}
+      ,[hq_fax1] = #{hqFax1}
+      ,[hq_fax2] = #{hqFax2}
+      ,[com_biz] = #{comBiz}
+      ,[com_cate] = #{comCate}
+      ,[com_type] = #{comType}
+      ,[com_est_d] = #{comEstD}
+      ,[com_open_d] = #{comOpenD}
+      ,[com_close_d] = #{comCloseD}
+      ,[is_use] = #{isUse}
+      ,[com_eng_nm] = #{comEngNm}
+      ,[cor_eng_nm] = #{corEngNm}
+      ,[com_eng_addr] = #{comEngAddr}
+      ,[com_homepage] = #{comHomepage}
+      ,[com_gwpage] = #{comGwpage}
+      ,[home_postcode] = #{homePostcode}
+      ,[home_addr] = #{homeAddr}
+      ,[home_addr_detail] = #{homeAddrDetail}
+      ,[home_phone] = #{homePhone}
+      ,[company_nm] = #{companyNm}
+ WHERE company_id = #{companyId}
+	</insert>
+	
+    <select id="selectCompanyList" parameterType="companyVO" resultType="companyVO">
+            SELECT
+               company_id
+	           ,company_nm
+	           ,acc_order
+	           ,acc_start_d
+	           ,acc_end_d
+	           ,com_reg_num
+	           ,cor_reg_num
+	           ,boss_nm
+	           ,is_foreigner
+	           ,citi_num
+	           ,hq_postcode
+	           ,hq_addr
+	           ,hq_addr_detail
+	           ,hq_phone1
+	           ,hq_phone2
+	           ,hq_fax1
+	           ,hq_fax2
+	           ,com_biz
+	           ,com_cate
+	           ,com_type
+	           ,com_est_d
+	           ,com_open_d
+	           ,com_close_d
+	           ,is_use
+	           ,com_eng_nm
+	           ,cor_eng_nm
+	           ,com_eng_addr
+	           ,com_homepage
+	           ,com_gwpage
+	           ,home_postcode
+	           ,home_addr
+	           ,home_addr_detail
+	           ,home_phone
+	           ,is_deleted
+              FROM dbo.company
+              WHERE 1=1
+				<if test='companyId != null and companyId != "0"'>
+				AND company_id = #{companyId}
+				</if>
+				AND is_deleted = 0
+            ORDER BY company_nm
+    </select>
+    
+	<update id="deleteCompanyManage" parameterType="companyVO">
+		UPDATE [dbo].[company]
+		   SET [is_deleted] = #{isDeleted}
+		 WHERE company_id = #{companyId}
+	</update>
+
+
+
+	<insert id="insertWorkplace" parameterType="workplaceVO">
+INSERT INTO [dbo].[workplace]
+           ([com_reg_num]
+           ,[hq_reg_num]
+           ,[cor_reg_num]
+           ,[boss_nm]
+           ,[hq_postcode]
+           ,[hq_addr]
+           ,[hq_addr_detail]
+           ,[hq_phone1]
+           ,[hq_phone2]
+           ,[hq_fax1]
+           ,[hq_fax2]
+           ,[com_biz]
+           ,[com_cate]
+           ,[taxoffice_code]
+           ,[taxoffice_area_nm]
+           ,[com_open_d]
+           ,[com_close_d]
+           ,[is_hq]
+           ,[is_imple_status_reported]
+           ,[main_biz_cd]
+           ,[main_biz_cd_nm]
+           ,[local_tax_return_admin_num]
+           ,[local_tax_return_admin_addr]
+           ,[local_tax_return_notify_num]
+           ,[local_tax_return_notify_addr]
+           ,[local_tax_class_cd]
+           ,[local_tax_class_value]
+           ,[elec_noti_id]
+           ,[addr_phone_num]
+           ,[report_phone_num]
+           ,[report_email]
+           ,[report_liquor_cd]
+           ,[elec_filing_sido]
+           ,[elec_filing_sigungu]
+           ,[elec_filing_eubmyeon]
+           ,[elec_filing_load_cd]
+           ,[elec_filing_load_nm]
+           ,[elec_filing_is_based]
+           ,[elec_building_main_num]
+           ,[elec_building_sub_num]
+           ,[com_eng_nm]
+           ,[cor_eng_nm]
+           ,[com_eng_addr]
+           ,[com_homepage]
+           ,[com_gwpage]
+           ,[home_postcode]
+           ,[home_addr]
+           ,[home_addr_detail]
+           ,[home_phone]
+           ,[workplace_nm]
+           ,[is_deleted])
+     VALUES
+           (#{comRegNum}
+           ,#{hqRegNum}
+           ,#{corRegNum}
+           ,#{bossNm}
+           ,#{hqPostcode}
+           ,#{hqAddr}
+           ,#{hqAddrDetail}
+           ,#{hqPhone1}
+           ,#{hqPhone2}
+           ,#{hqFax1}
+           ,#{hqFax2}
+           ,#{comBiz}
+           ,#{comCate}
+           ,#{taxofficeCode}
+           ,#{taxofficeAreaNm}
+           ,#{comOpenD}
+           ,#{comCloseD}
+           ,#{isHq}
+           ,#{isImpleStatusReported}
+           ,#{mainBizCd}
+           ,#{mainBizCdNm}
+           ,#{localTaxReturnAdminNum}
+           ,#{localTaxReturnAdminAddr}
+           ,#{localTaxReturnNotifyNum}
+           ,#{localTaxReturnNotifyAddr}
+           ,#{localTaxClassCd}
+           ,#{localTaxClassValue}
+           ,#{elecNotiId}
+           ,#{addrPhoneNum}
+           ,#{reportPhoneNum}
+           ,#{reportEmail}
+           ,#{reportLiquorCd}
+           ,#{elecFilingSido}
+           ,#{elecFilingSigungu}
+           ,#{elecFilingEubmyeon}
+           ,#{elecFilingLoadCd}
+           ,#{elecFilingLoadNm}
+           ,#{electFilingIsBased}
+           ,#{elecBuildingMainNum}
+           ,#{elecBuildingSubNum}
+           ,#{comEngNm}
+           ,#{corEngNm}
+           ,#{comEngAddr}
+           ,#{comHomepage}
+           ,#{comGwpage}
+           ,#{homePostcode}
+           ,#{homeAddr}
+           ,#{homeAddrDetail}
+           ,#{homePhone}
+           ,#{workplaceNm}
+           ,0);
+	</insert>
+	
+	<insert id="updateWorkplace" parameterType="workplaceVO">
+UPDATE [dbo].[workplace]
+   SET [com_reg_num] = #{comRegNum}
+      ,[hq_reg_num] = #{hqRegNum}
+      ,[cor_reg_num] = #{corRegNum}
+      ,[boss_nm] = #{bossNm}
+      ,[hq_postcode] = #{hqPostcode}
+      ,[hq_addr] = #{hqAddr}
+      ,[hq_addr_detail] = #{hqAddrDetail}
+      ,[hq_phone1] = #{hqPhone1}
+      ,[hq_phone2] = #{hqPhone2}
+      ,[hq_fax1] = #{hqFax1}
+      ,[hq_fax2] = #{hqFax2}
+      ,[com_biz] = #{comBiz}
+      ,[com_cate] = #{comCate}
+      ,[taxoffice_code] = #{taxofficeCode}
+      ,[taxoffice_area_nm] = #{taxofficeAreaNm}
+      ,[com_open_d] = #{comOpenD}
+      ,[com_close_d] = #{comCloseD}
+      ,[is_hq] = #{isHq}
+      ,[is_imple_status_reported] = #{isImpleStatusReported}
+      ,[main_biz_cd] = #{mainBizCd}
+      ,[main_biz_cd_nm] = #{mainBizCdNm}
+      ,[local_tax_return_admin_num] = #{localTaxReturnAdminNum}
+      ,[local_tax_return_admin_addr] = #{localTaxReturnAdminAddr}
+      ,[local_tax_return_notify_num] = #{localTaxReturnNotifyNum}
+      ,[local_tax_return_notify_addr] = #{localTaxReturnNotifyAddr}
+      ,[local_tax_class_cd] = #{localTaxClassCd}
+      ,[local_tax_class_value] = #{localTaxClassValue}
+      ,[elec_noti_id] = #{elecNotiId}
+      ,[addr_phone_num] = #{addrPhoneNum}
+      ,[report_phone_num] = #{reportPhoneNum}
+      ,[report_email] = #{reportEmail}
+      ,[report_liquor_cd] = #{reportLiquorCd}
+      ,[elec_filing_sido] = #{elecFilingSido}
+      ,[elec_filing_sigungu] = #{elecFilingSigungu}
+      ,[elec_filing_eubmyeon] = #{elecFilingEubmyeon}
+      ,[elec_filing_load_cd] = #{elecFilingLoadCd}
+      ,[elec_filing_load_nm] = #{elecFilingLoadNm}
+      ,[elec_filing_is_based] = #{electFilingIsBased}
+      ,[elec_building_main_num] = #{elecBuildingMainNum}
+      ,[elec_building_sub_num] = #{elecBuildingSubNum}
+      ,[com_eng_nm] = #{comEngNm}
+      ,[cor_eng_nm] = #{corEngNm}
+      ,[com_eng_addr] = #{comEngAddr}
+      ,[com_homepage] = #{comHomepage}
+      ,[com_gwpage] = #{comGwpage}
+      ,[home_postcode] = #{homePostcode}
+      ,[home_addr] = #{homeAddr}
+      ,[home_addr_detail] = #{homeAddrDetail}
+      ,[home_phone] = #{homePhone}
+      ,[workplace_nm] = #{workplaceNm}
+ WHERE workplace_id = #{workplaceId}
+	</insert>
+	
+    <select id="selectWorkplaceList" parameterType="workplaceVO" resultType="workplaceVO">
+SELECT [com_reg_num]
+      ,[hq_reg_num]
+      ,[cor_reg_num]
+      ,[boss_nm]
+      ,[hq_postcode]
+      ,[hq_addr]
+      ,[hq_addr_detail]
+      ,[hq_phone1]
+      ,[hq_phone2]
+      ,[hq_fax1]
+      ,[hq_fax2]
+      ,[com_biz]
+      ,[com_cate]
+      ,[taxoffice_code]
+      ,[taxoffice_area_nm]
+      ,[com_open_d]
+      ,[com_close_d]
+      ,[is_hq]
+      ,[is_imple_status_reported]
+      ,[main_biz_cd]
+      ,[main_biz_cd_nm]
+      ,[local_tax_return_admin_num]
+      ,[local_tax_return_admin_addr]
+      ,[local_tax_return_notify_num]
+      ,[local_tax_return_notify_addr]
+      ,[local_tax_class_cd]
+      ,[local_tax_class_value]
+      ,[elec_noti_id]
+      ,[addr_phone_num]
+      ,[report_phone_num]
+      ,[report_email]
+      ,[report_liquor_cd]
+      ,[elec_filing_sido]
+      ,[elec_filing_sigungu]
+      ,[elec_filing_eubmyeon]
+      ,[elec_filing_load_cd]
+      ,[elec_filing_load_nm]
+      ,[elec_filing_is_based]
+      ,[elec_building_main_num]
+      ,[elec_building_sub_num]
+      ,[com_eng_nm]
+      ,[cor_eng_nm]
+      ,[com_eng_addr]
+      ,[com_homepage]
+      ,[com_gwpage]
+      ,[home_postcode]
+      ,[home_addr]
+      ,[home_addr_detail]
+      ,[home_phone]
+      ,[workplace_id]
+      ,[workplace_nm]
+      ,[is_deleted]
+  FROM [dbo].[workplace]
+              WHERE 1=1
+				<if test='workplaceId != null and workplaceId != "0"'>
+				AND workplace_id = #{workplaceId}
+				</if>
+				AND is_deleted = 0
+            ORDER BY workplace_nm
+    </select>
+    
+	<update id="deleteWorkplaceManage" parameterType="workplaceVO">
+		UPDATE [dbo].[workplace]
+		   SET [is_deleted] = #{isDeleted}
+		 WHERE workplace_id = #{workplaceId}
+	</update>
+</mapper>
